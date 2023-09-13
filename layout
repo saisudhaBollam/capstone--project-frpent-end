@@ -1,0 +1,511 @@
+import { Link } from 'react-router-dom';
+import restaurantFoodImage from './assets/restaurant-food.jpg';
+import './Hero.css';
+import pages from '../../../utils/pages';
+
+const Hero = () => {
+  return (
+    <section className="hero">
+      <div className="container grid">
+        <div className="hero-information">
+          <h1>Little Lemon</h1>
+          <h2>Seattle</h2>
+          <p>
+            We are a family owned Mediterranean restaurant, 
+            focused on traditional recipes served with a modern twist.
+          </p>
+          <Link className="button-primary" to={pages.get('bookings').path}>
+            Reserve a table
+          </Link>
+        </div>
+        <img 
+          className="hero-image" 
+          src={restaurantFoodImage} 
+          alt="Restaurant food" 
+        />
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
+ 68 changes: 68 additions & 0 deletions68  
+src/components/pages/Home/MealCard.css
+@@ -0,0 +1,68 @@
+.meal-card {
+  grid-column: auto;
+  grid-row: 2;
+  min-height: 31.25rem;
+  padding-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: #EDEFEE;
+}
+
+.meal-card:hover .meal-card-image img {
+  transform: scale(1.1);
+}
+
+.meal-card-image img {
+  width: 100%;
+  height: 12.5rem;
+  object-fit: cover;
+  margin-bottom: 0.9375rem;
+  transition: all ease-in-out 0.3s;
+}
+
+.meal-card-header, 
+.meal-card-body-footer {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.meal-card-header {
+  display: flex;
+  gap: 1.25rem;
+  justify-content: space-between;
+  margin-bottom: 1.875rem;
+}
+
+.meal-card-header h3 {
+  font-size: 1.15rem;
+}
+
+.meal-card-header span {
+  font-weight: bold;
+  color: #EE9972;
+}
+
+.meal-card-body-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.meal-card-body-footer a {
+  font-weight: bold;
+}
+
+.meal-card-body-footer svg {
+  margin-left: 0.5rem;
+}
+
+/*-- Media queries ------------------------------------------------------*/
+
+@media (max-width: 960px) {
+.meal-card {
+  grid-row: auto;
+}
+}
+ 27 changes: 27 additions & 0 deletions27  
+src/components/pages/Home/MealCard.js
+@@ -0,0 +1,27 @@
+import { faMotorcycle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
+import './MealCard.css';
+import pages from '../../../utils/pages';
+
+const MealCard = ({ meal }) => {
+  return (
+    <article className="meal-card">
+      <div className="meal-card-image">
+        <img src={meal.image} alt={meal.name} />
+      </div>
+      <div className="meal-card-header">
+        <h3>{meal.name}</h3>
+        <span>{meal.price}</span>
+      </div>
+      <div className="meal-card-body-footer">
+        <p>{meal.description}</p>
+        <Link to={pages.get('orderOnline').path}>
+          Order a delivery <FontAwesomeIcon icon={faMotorcycle} />
+        </Link>
+      </div>
+    </article>
+  );
+};
+
+export default MealCard;
+ 59 changes: 59 additions & 0 deletions59  
+src/components/pages/Home/OurStory.css
+@@ -0,0 +1,59 @@
+.our-story {
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+}
+
+.our-story-description {
+  grid-column: 1;
+}
+
+.our-story-description h1 {
+  color: #F4CE14;
+}
+
+.our-story-description p {
+  padding-top: 1.5rem;
+}
+
+.our-story-chefs {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.our-story-chefs img {
+  border-radius: 1rem;
+}
+
+/*-- Media queries ------------------------------------------------------*/
+
+@media (max-width: 915px) {
+.our-story {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+}
+
+.our-story-chefs {
+  grid-column: 1;
+  flex-direction: row;
+}
+
+.our-story-chefs img {
+  max-width: 50%;
+}
+}
+
+@media (max-width: 715px) {
+.our-story {
+  grid-template-rows: repeat(3, auto);
+}
+
+.our-story-chefs {
+  flex-direction: column;
+}
+
+.our-story-chefs img {
+  max-width: 100%;
+}
+}
+ 35 changes: 35 additions & 0 deletions35  
+src/components/pages/Home/OurStory.js
+@@ -0,0 +1,35 @@
+import chefsMarioAndAdrianAImage from './assets/chefs-mario-and-adrian_a.jpg';
+import chefsMarioAndAdrianBImage from './assets/chefs-mario-and-adrian_b.jpg';
+import './OurStory.css';
+
+const OurStory = () => {
+  return (
+    <section className="container grid our-story">
+      <div className="our-story-description">
+        <h1>Little Lemon</h1>
+        <h2>Seattle</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
+          culpa qui officia deserunt mollit anim id est laborum. Sed ut 
+          perspiciatis unde omnis iste natus error sit voluptatem accusantium 
+          doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo 
+          inventore veritatis et quasi architecto beatae vitae dicta sunt 
+          explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut 
+          odit aut fugit, sed quia consequuntur magni dolores eos qui ratione 
+          voluptatem sequi nesciunt.
+        </p>
+      </div>
+      <div className="our-story-chefs">
+        <img src={chefsMarioAndAdrianAImage} alt="Chefs Mario and Adrian" />
+        <img src={chefsMarioAndAdrianBImage} alt="Chefs Mario and Adrian" />
+      </div>
+    </section>
+  );
+};
+
+export default OurStory;
+ 34 changes: 34 additions & 0 deletions34  
+src/components/pages/Home/TestimonialCard.css
+@@ -0,0 +1,34 @@
+.testimonial-card {
+  grid-column: auto;
+  grid-row: 2;
+  min-height: 22.75rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem;
+  background-color: #FFFFFF;
+  border-radius: 1rem;
+}
+
+.testimonial-card img {
+  width: 8rem;
+  margin: 0 auto 0.5rem auto;
+  border-radius: 50%;
+}
+
+.testimonial-card h4 {
+  margin: 0 auto 1rem auto;
+}
+
+.testimonial-card span {
+  color: #F4CE14;
+}
+
+/*-- Media queries ------------------------------------------------------*/
+
+@media (max-width: 949px) {
+.testimonial-card {
+  grid-column: auto;
+  grid-row: auto;
+}
+}
+ 29 changes: 29 additions & 0 deletions29  
+src/components/pages/Home/TestimonialCard.js
+@@ -0,0 +1,29 @@
+import {
+  faStar,
+  faStarHalfStroke
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './TestimonialCard.css';
+
+const ratingLevels = { '0.5': faStarHalfStroke, '1': faStar, };
+
+const TestimonialCard = ({ customer }) => {
+  return (
+    <article className="testimonial-card">
+      <img src={customer.image} alt={customer.fullName} />
+      <h4>{customer.fullName}</h4>
+      <span>
+        {customer.rating.map((ratingPoint, index) => 
+          <FontAwesomeIcon 
+            key={index} 
+            icon={ratingLevels[ratingPoint]} 
+            size="xs" 
+          />
+        )}
+      </span>
+      <blockquote><p>"{customer.says}"</p></blockquote>
+    </article>
+  );
+};
+
+export default TestimonialCard;
+ 53 changes: 53 additions & 0 deletions53  
+src/components/pages/Home/Testimonials.css
+@@ -0,0 +1,53 @@
+.testimonials {
+  padding-top: 1.875rem;
+  padding-bottom: 1.875rem;
+  background-color: #495E57;
+}
+
+.testimonials .container {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 1.25rem;
+}
+
+.testimonials h2 {
+  grid-column: 1 / 5;
+  grid-row: 1;
+  margin-bottom: 1.875rem;
+  color: #FFFFFF;
+}
+
+/*-- Media queries ------------------------------------------------------*/
+
+@media (max-width: 949px) {
+.testimonials .container {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, auto);
+}
+
+.testimonials h2 {
+  grid-column: 1 / 4;
+}
+}
+
+@media (max-width: 711px) {
+.testimonials .container {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, auto);
+}
+
+.testimonials h2 {
+  grid-column: 1 / 3;
+}
+}
+
+@media (max-width: 576px) {
+.testimonials .container {
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, auto);
+}
+
+.testimonials h2 {
+  grid-column: 1 / 2;
+}
+}
+ 52 changes: 52 additions & 0 deletions52  
+src/components/pages/Home/Testimonials.js
+@@ -0,0 +1,52 @@
+import customer1Image from './assets/customer1.jpg';
+import customer2Image from './assets/customer2.jpg';
+import customer3Image from './assets/customer3.jpg';
+import customer4Image from './assets/customer4.jpg';
+import './Testimonials.css';
+import TestimonialCard from './TestimonialCard';
+
+const customers = [
+  {
+    fullName: 'Maria Sanchez',
+    image: customer1Image,
+    rating: [1, 1, 1, 1, 0.5],
+    says: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+      eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+  },
+  {
+    fullName: 'Antony Clifton',
+    image: customer2Image,
+    rating: [1, 1, 1, 1, 1],
+    says: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+      eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+  },
+  {
+    fullName: 'Tamika Jackson',
+    image: customer3Image,
+    rating: [1, 1, 1, 1, 0.5],
+    says: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+      eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+  },
+  {
+    fullName: 'Brandon Ming',
+    image: customer4Image,
+    rating: [1, 1, 1, 1],
+    says: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+      eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+  },
+];
+
+const Testimonials = () => {
+  return (
+    <section className="testimonials">
+      <div className="container grid">
+        <h2>What people say about us!</h2>
+        {customers.map((customer, index) => 
+          <TestimonialCard key={index} customer={customer} />
+        )}
+     </div>
+    </section>
+  );
+};
+
+export default Testimonials;
+ 45 changes: 45 additions & 0 deletions45  
+src/components/pages/Home/WeekSpecials.css
+@@ -0,0 +1,45 @@
+.week-specials {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 1.25rem;
+}
+
+.week-specials-header {
+  grid-column: 1 / 4;
+  grid-row: 1;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  margin-bottom: 1.875rem;
+}
+
+.week-specials-header h2 {
+  line-height: 1;
+  font-family: "Markazi Text";
+  font-weight: normal;
+  font-size: 2.5rem;
+}
+
+/*-- Media queries ------------------------------------------------------*/
+
+@media (max-width: 960px) {
+.week-specials {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+}
+
+.week-specials-header {
+  grid-column: 1 / 3;
+}
+}
+
+@media (max-width: 692px) {
+.week-specials {
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, auto);
+}
+
+.week-specials-header {
+  grid-column: 1 / 2;
+}
+}
+ 50 changes: 50 additions & 0 deletions50  
+src/components/pages/Home/WeekSpecials.js
+@@ -0,0 +1,50 @@
+import { Link } from 'react-router-dom';
+import bruschettaImage from './assets/bruschetta.jpg';
+import greekSaladImage from './assets/greek-salad.jpg';
+import lemonDessertImage from './assets/lemon-dessert.jpg';
+import './WeekSpecials.css';
+import pages from '../../../utils/pages';
+import MealCard from './MealCard';
+
+const meals = [
+  {
+    name: 'Greek Salad',
+    image: greekSaladImage,
+    price: '$12.99',
+    description: `The famous greek salad of crispy lettuce, peppers, olives and 
+      our Chicago style feta cheese, garnished with crunchy garlic and rosemary 
+      croutons.`,
+  },
+  {
+    name: 'Bruschetta',
+    image: bruschettaImage,
+    price: '$5.99',
+    description: `Our Bruschetta is made from grilled bread that has been 
+      smeared with garlic and seasoned with salt and olive oil.`,
+  },
+  {
+    name: 'Lemon Dessert',
+    image: lemonDessertImage,
+    price: '$5.00',
+    description: `This comes straight from grandma's recipe book, every last 
+      ingredient has been sourced and is as authentic as can be imagined.`,
+  },
+];
+
+const WeekSpecials = () => {
+  return (
+    <section className="container grid week-specials">
+      <div className="week-specials-header">
+        <h2>This week specials!</h2>
+        <Link className="button-primary" to={pages.get('orderOnline').path}>
+          Online Menu
+        </Link>
+      </div>
+      {meals.map((meal, index) => 
+        <MealCard key={index} meal={meal} />
+      )}
+    </section>
+  );
+};
