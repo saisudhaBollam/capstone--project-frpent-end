@@ -1,0 +1,16 @@
+mport Header from './Header';
+import Footer from './Footer';
+
+const Layout = ({ children }) => {
+  return (
+    <>
+      <Header />
+      <main>{children}</main>
+      <Footer />
+    </>
+  );
+};
+
+export default Layout;
+ 18 changes: 18 additions & 0 deletions18  
+src/components/layout/ScrollToTop.js
